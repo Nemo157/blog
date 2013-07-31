@@ -1,0 +1,49 @@
+So I've finally started another project (along with [Daniel Bentall], [Simon
+Richards], and [Joshua Jordan]) that I'll attempt to use to kickstart me
+actually blogging.[^third] Bet you can't guess what it is from the
+title.[^declining]
+
+<span class="spoiler">A cocktail maker!</span> I've been wanting to make one of
+these for years, ever since I saw one posted somewhere on the interwebs; I want
+to say it was on reddit, but I think this was before I'd even discovered
+reddit. The only example of a similar device that I can find at the moment is
+[The Inebriator], but that's a lot more commercialised than what we're planning
+on.
+
+I'm currently planning on posting every 2 or 3 days about this, hopefully it
+will promote me to actually keep on working on this steadily. The posts will
+generally be quite short,[^length] both so I don't get too distracted when trying to
+finish one and so I have enough material to keep posting with regularly.[^spree] Coming
+up next will be a few posts detailing a broad overview of the system, followed
+by the initial section that I'm planning to work on.
+<span style="display:none" markdown="1">[^footnoting]</span>
+
+<hr width="80%" />
+
+[^third]: Third time's the charm, right?[^footnoting]
+
+[^declining]: Declining those Latin nouns took far longer than it should, I really need to learn Latin properly someday.
+
+[^spree]: How long will my posting spree last this time? Can I beat my current record of one post before dropping a topic.
+
+[^length]: Although probably longer than this one.
+
+[^footnoting]:
+    Shout out to Lauren Wayne for an [easy way to do footnoting in
+    Blogger][lauren_wayne_footnotes], I'm going to be using this all the time
+    from now.  Adapted it a bit to use an ordered list for nicer formatting of
+    larger footnotes, but all the essentials are stolen from there. I don't
+    think I'm going to last very long doing this by hand though, I should try
+    and find some way to get Markdown to do it for me.
+
+[lauren_wayne_footnotes]: http://www.laurenwayne.com/2011/08/how-to-create-footnotes-in-blogger.html
+    "How to create footnotes in Blogger"
+
+[The Inebriator]: https://www.youtube.com/watch?v=hJIkJ9x0-JQ
+    "The Inebriator - Arduino Cocktail Machine - Dispensing Signature Cocktail - YouTube"
+
+[Simon Richards]: https://plus.google.com/116522036295292826504/posts
+
+[Daniel Bentall]: https://www.facebook.com/daniel.bentall.7
+
+[Joshua Jordan]: https://plus.google.com/105587082350852481881/posts

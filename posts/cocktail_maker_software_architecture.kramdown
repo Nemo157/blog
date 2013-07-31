@@ -1,0 +1,54 @@
+As mentioned earlier the hardware side of the cocktail maker will be controlled
+by a Raspberry Pi with a user interface running on an Android tablet.  The
+Raspberry Pi will make interacting with the valves simple via it's builtin GPIO
+ports while the Android interface will mean we can have a nice touchscreen based
+client.
+
+For ease of development the two devices will likely communicate with a RESTlike
+API.  Since I've been sort of working as a web developer recently I've become
+very familiar with the 
+
+There is actually two mostly distinct sets of data that the server will have to
+provide for the client.  The majority of the data will be a generic collection of
+cocktails with pictures, descriptions, recipes etc.  Then there will also be the
+data specific to the cocktail maker, list of available ingredients to allow
+filtering the cocktails, calibration information[^viscosity], current processing
+state.  The first of these sets is also very widely applicable, anyone and
+everyone[^legal-age] could be interested, including other people building
+automated cocktail makers.
+
+For that reason I've decided to separate the cocktail database from the main
+cocktail maker server.  I haven't been able to find any appropriate databases
+existing so I've taken it upon myself to create the first crowd-sourced
+cocktail database.  Since this is a part-time after work project it's going to
+be quite a while till it's up and running, I'm hoping to have a very basic
+version up within a few months. Actual time frame will probably depend a lot on
+how much stuff I get up to in America, if I find there's not really that much to
+do in Austin I may end up spending a large part of most evenings working on it.
+
+In the meantime we'll probably have a simple hardcoded list of cocktails to use.
+Worst case we'll just be stuck drinking [Tom Collins]'
+continuously.[^could-be-worse]
+
+<hr width="80%" />
+
+[^viscosity]:
+    Especially if the pipes flow rate is affected by viscosity, sugar syrup can
+    be [a few hundred to over a thousand times as viscous as water][sugar syrup
+    viscosity].
+
+[^legal-age]:
+    Above the legal age for alcohol consumption in their country.
+
+[^could-be-worse]:
+    I could think of much worse things in life than a nigh unlimited supply of
+    automatically prepared Tom Collins'
+    <span style="font-size:xx-small" markdown="span">
+      [*\*Cough\**kscrew][Corkscrew]
+    </span>.
+
+[sugar syrup viscosity]: http://www.vikingpump.com/liquid-list.asp?name=sugar%20syrup "sugar syrup - Liquid List \| Viking Pump.com"
+
+[Tom Collins]: https://en.wikipedia.org/wiki/Tom_Collins "Tom Collins - Wikipedia, the free encyclopedia"
+
+[Corkscrew]: http://www.drinksmixer.com/drink2993.html "Corkscrew recipe"

@@ -1,0 +1,61 @@
+So far these are the components we have:
+
+<div markdown="span">
+[![tubing small]][tubing full]
+[![valves small]][valves full]
+</div>{:style="margin-left:auto;margin-right:auto;width:516px;"}
+
+Ten metres of 10mm silicon piping (food grade[^supposedly]) and fifteen solenoid
+valves.
+
+The current plan is to have all the spirits and mixers in upside down bottles
+above a bench, tubes will come down from these bottles, pass through the valves
+then all come together in some form of tap above where you place your glass.
+The valves will be controlled by a Raspberry Pi with an Android tablet hooked up
+to allow selection of which drink you want.
+
+<div markdown="span">
+[![sketch small]][sketch full]
+</div>{:style="margin-left:auto;margin-right:auto;width:518px;"}
+
+It will of course look much fancier than this sketch.  Personally I'm thinking
+some nice dark stained wood with brass fixtures, some form of laser cut drip
+tray grate with an icon representing the limitless potential of this device, and
+of course only top shelf liquors allowed.
+
+Designing it this way means there is very little mechanical design that needs
+doing, really the most complicated part will be ensuring the bottles are held
+securely while being easy to replace as they get empty.[^detect_empty]  Which is
+all for the best, while we have 3 mechatronics engineers on the project only one
+has done any hardware work since leaving uni.
+
+The biggest disadvantage of this is the limitation of only working with liquids.
+It would be amazing if we could have ice and garnishes added automatically, but
+(at least for the first iteration) we are going to require the user to manually
+add these.
+
+Since we won't have much mechanical design to do we can instead spend longer on
+the software side.  If we get a really nice client designed for the Android
+tablet, complete with all the background info about cocktails and the ability
+for the user to adjust the strength on the fly, then this will be re-usable if
+(once) we build a version 2 with more capabilities.
+
+<hr width="80%" />
+
+[^supposedly]:
+    Supposedly.  Not really sure how much you can trust that sort of claim from
+    cheap online stores.
+
+[^detect_empty]:
+    Although it would be nice if it detected the bottles getting empty and
+    warned the user of this, or even hook it up to an online store and get it to
+    order new bottles automatically.
+
+[sketch small]: http://2.bp.blogspot.com/-5QX5baot3wQ/UfeZhrcWn7I/AAAAAAAAAPM/jVuoCw90DsM/s640/opifex_vocatuum_sketch.jpg
+[sketch full]: http://2.bp.blogspot.com/-5QX5baot3wQ/UfeZhrcWn7I/AAAAAAAAAPM/jVuoCw90DsM/s1600/opifex_vocatuum_sketch.jpg
+
+[valves small]: http://1.bp.blogspot.com/-zNi83yavDBs/UfbrF4n7g_I/AAAAAAAAAOw/Pj5jt0bD-hs/s320/opifex_vocatuum_valves.jpg
+[valves full]: http://1.bp.blogspot.com/-zNi83yavDBs/UfbrF4n7g_I/AAAAAAAAAOw/Pj5jt0bD-hs/s1600/opifex_vocatuum_valves.jpg
+
+[tubing small]: http://3.bp.blogspot.com/-0PiA1tNBlvk/UfbrFxzdNWI/AAAAAAAAAO0/pVXa6rtAaas/s320/opifex_vocatuum_tubing.jpg
+[tubing full]: http://3.bp.blogspot.com/-0PiA1tNBlvk/UfbrFxzdNWI/AAAAAAAAAO0/pVXa6rtAaas/s1600/opifex_vocatuum_tubing.jpg

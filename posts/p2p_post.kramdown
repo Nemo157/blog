@@ -1,0 +1,162 @@
+Cryptographically secure P2P postal service.
+
+This originally came out of a random idea I had while heading home today:
+cryptographically authenticated location tracking. I thought this would be a
+required technology for implementing a secure P2P postal service. It would
+mostly consist of a way to generate a proof that you were at a specific location
+(+/- specified accuracy) at a specific time. It could either be built on top of
+a central system like GPS, or, for maximum liberal sharing economy status on top
+of a "mesh-based, cryptographically secure (and private), web of trust (WoT)
+authenticated" location tracking service[^mesh-location].
+
+While trying to sketch out an actual implementation I realised that you wouldn't
+actually need the authenticated location tracking. The package itself already
+has to do enough crypto and network work to ensure it's delivered reliably that
+integrating the location tracking into the package itself would be a simple
+enough step and mean it can just trust itself (assuming the actual tracking
+system is secure).
+
+The other major piece required would be a smart contract system like
+Ethereum[^ethereum] to handle the contract and payments side. You would just
+need to:
+
+ * grab one of the proven standard contracts[^standard]
+ * package your item with a postal tracker
+ * mutually authenticate the tracker and contract to each other
+ * seed the contract with the final location and funds to pay deliverers
+ * leave it somewhere it's likely to get picked up
+
+The postal tracker would be a very simple IoT module containing a few
+chips/cores connected together with a very basic firmware:
+
+ * secure cryptoprocessor[^tpm]
+ * tamper detection
+ * NFC I/O
+ * BTLE beacon
+ * location tracker
+ * mesh network access module
+
+The BTLE beacon will advertise that this is a package + the associated contracts
+public key. If you're part of the delivery network then you would be running an
+application listening for these beacons, if the delivery location is in the
+direction you're heading and the price meets your minimum[^price] then the
+application would pop up a notification informing you of it. You'd then go to
+the package and interface with it via NFC to prove you're actually there before
+taking it. You carry it for a while to either its final
+destination[^destination] or somewhere that your client has determined is the
+optimal location for you to leave it. There'd be a brief conversation between
+the package, your client and the smart contract, and your account would be
+credited with whatever portion of the delivery fee you'd earned.
+
+Obviously there are many places in here that could be smarter. One big one is
+the initial pickup, rather than just having a flat % fee for how much closer you
+get the package there could be a much larger negotiation between your client and
+the contract for the package. Depending on how much you trust your client it
+could automatically negotiate a complex contract with many different potential
+fees based on speed of delivery, once negotiations with the contract are done
+they would instantiate a new smart contract encoding these potential payments,
+the package's contract would fund this new contract and it would be let loose to
+oversee this part of the package's journey. This could also be done as some sort
+of auction system, which would require the contract to have some way to decide
+on how to value speed of delivery versus cost (with any remaining funds being
+sent back to the sender at the end).
+
+Actually, this talk of negotiation made me realise that the controlling entity
+of the package would not have to be a contract. In the simple case it probably
+makes sense to just have a single contract controlling throughout the lifetime
+of the package, but if you have complicated negotiation and reverse auctions to
+run you probably just want a self-governing agent running it. If you don't care
+about the package being tied to (one of) your public identity(ies) then just
+(one of) your general purpose public agent(s), otherwise a specialised agent
+instantiated and funded for this specific package. This agent would then be
+negotiate and instantiate smart contracts with the deliverers for the purpose of
+getting this package to its destination.
+
+Another place to add more smarts would be a reputation system, this could be
+built into the smart contract governing payment, as well as paying out currency
+it would payout reputation as well. Reputation would have to be more complicated
+than a simple balance though, for the purposes of negotiation it would have to
+differentiate between things like actual failure to deliver, consistent late
+delivery and occasional damage during transport.
+
+The reputation system could include things such as having the deliverer create a
+bond contract before being able to pickup their first few packages. As their
+reputation improves the agents in charge of the packages will start lowering the
+bond, and even potentially for very high priority packages being delivered by
+very high reputation deliverers offer a partial pre-payment as funds to perform
+the delivery with (although that would be better done by the deliverers client
+securing very good terms on a loan by showing the contract for delivery +
+reputation to an automated loan broker).
+
+&lt;/random brain dump&gt;[^memes]
+
+<hr width="80%" />
+
+[^mesh-location]:
+    Something like:
+
+     * a set of stable nodes that you trust that don't move
+     * a mesh network spreading proofs of relative distances
+     * strong confirmations from mobile devices within a few mesh hops within
+       your WoT
+     * weak confirmations from mobile devices within a few mesh hops that are
+       close to your WoT, some low number of WoT hops should be provable,
+       preferably without leaking knowledge of the identities along the link,
+       just that there is a link of x hops
+
+    Spreading all those proofs seems like it might be a bit data-heavy,
+    especially the proof of devices close to your WoT.
+
+[^ethereum]:
+    Or an actually secure/provable successor to it.
+
+[^standard]:
+    So deliverers won't need to validate that your custom contract will
+    actually pay them.
+
+[^tpm]:
+    I really just want to say [TPM][] here, but that's a standard rather than a
+    generic term, the closest general category seems to be "[Secure
+    cryptoprocessor][]", but that doesn't have any TLA for it.
+
+    This seems common to me in crypto, [DSA][] (Digital Signature Algorithm) is
+    the first acronym I thought of when wanting to refer to the category of
+    digital signatures, but it is also a standard, the best TLA I could think of
+    for the category of algorithms that implement digital signatures is DSS
+    (Digital Signature Scheme), but what makes it a scheme rather than an
+    algorithm?
+
+[^price]:
+    This would be a little more complicated that just matching the minimum, it
+    would have to take into account a lot of variables like how much of the
+    packages journey you can actually do, how far out of your way you would have
+    to go to maximise your payment/hour etc. Luckily that's purely a client
+    feature and nothing to do with the basic system.
+
+[^destination]:
+    Probably just dropping it at a location near its recipient, they would then
+    be notified by the contract that it's ready for pickup. For urgent packages
+    they would probably have an extra bonus for in-person delivery since
+    finding actual buildings and the correct person to give it to is much more
+    difficult than just dropping it somewhere within a 500 m<sup>2</sup> circle.
+
+[^memes]:
+    Major relevant memes infesting my head:
+
+     * news about the DAO being hacked on HN
+     * secure cryptoprocessors, BTLE beacons and sensor (not quite mesh)
+       networks for work
+     * currently reading the second story in [METAtropolis][] which mentioned
+       p2p postal service
+     * just finished reading [Lady of Mazes][] which (like a lot of Karl
+       Schroeder books) involves a lot of ideas about self-organizing
+       distributed societies and cryptography, (Karl Schroeder, Hannu Rajaniemi
+       and about half of Charles Stross should be required reading for anyone
+       working on any p2p crypto system intended to be integrated into everyday
+       society).
+
+[TPM]: https://en.wikipedia.org/wiki/Trusted_Platform_Module "Trusted Platform Module"
+[DSA]: https://en.wikipedia.org/wiki/Digital_Signature_Algorithm "Digital Signature Algorithm"
+[Secure cryptoprocessor]: https://en.wikipedia.org/wiki/Secure_cryptoprocessor "Secure cryptoprocessor"
+[METAtropolis]: https://www.goodreads.com/book/show/9107759-metatropolis "METAtropolis: The Dawn of Uncivilization"
+[Lady of Mazes]: https://www.goodreads.com/book/show/19168622-lady-of-mazes "Lady of Mazes"
